@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: security
+  security:
+    oauth2:
+      authorizationServer:
+        issuer: http://auth-server:9000
+        client:
+          api-client:
+            registration:
+              client-id: api-client
+              client-secret: "{client_secret}"
+              client-name: API Client
+              client-authentication-methods:
+                - client_secrets_basic
+              authorization-grant-types:
+                - authorization-code
+                - refresh_token
+              redirect-uris:
+                - http://127.0.0.1:8080/login/oauth2/code/api-client-oidc
+                - http://127.0.0.1:8080/authorized
+              scopes:
+                - openid
+                - api.read
+
+server:
+  port: 9000
