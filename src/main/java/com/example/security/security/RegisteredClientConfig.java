@@ -32,6 +32,17 @@ public class RegisteredClientConfig {
                 .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
                 .build();
 
-        return new InMemoryRegisteredClientRepository(oidcClient);
+        RegisteredClient webClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                .clientId("web-client")
+                .clientSecret("{noop}secret")
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                .scope("read")
+                .scope(OidcScopes.OPENID)
+                .redirectUri("http://127.0.0.1:8080/login/oauth2/code/web-client")
+                .build();
+
+        return new InMemoryRegisteredClientRepository(oidcClient, webClient);
     }
 }
