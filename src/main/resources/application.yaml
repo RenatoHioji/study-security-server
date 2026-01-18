@@ -14,24 +14,28 @@ spring:
         client:
           api-client:
             registration:
-              client-id: api-client
-              client-secret: "{client_secret}"
-              client-name: API Client
+              client-id: bff-client
+              client-secret: "{noop}client_secret"
+              client-name: bff Client
               client-authentication-methods:
                 - client_secrets_basic
               authorization-grant-types:
                 - authorization-code
                 - refresh_token
               redirect-uris:
-                - http://127.0.0.1:8080/login/oauth2/code/api-client
+                - http://127.0.0.1:8080/login/oauth2/code/bff-client
                 - http://127.0.0.1:8080/
               scopes:
                 - openid
                 - profile
+                - read
             require-authorization-consent: true
 
 
 
 logging:
   level:
-    org.springframework.security: trace
+    org:
+      springframework:
+        oauth2: DEBUG
+        security: trace
