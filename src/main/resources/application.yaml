@@ -1,7 +1,13 @@
+server:
+  port: 9000
+
 spring:
   application:
     name: security
   security:
+    user:
+      name: user
+      password: password
     oauth2:
       authorizationServer:
         issuer: http://auth-server:9000
@@ -17,11 +23,15 @@ spring:
                 - authorization-code
                 - refresh_token
               redirect-uris:
-                - http://127.0.0.1:8080/login/oauth2/code/api-client-oidc
-                - http://127.0.0.1:8080/authorized
+                - http://127.0.0.1:8080/login/oauth2/code/api-client
+                - http://127.0.0.1:8080/
               scopes:
                 - openid
-                - api.read
+                - profile
+            require-authorization-consent: true
 
-server:
-  port: 9000
+
+
+logging:
+  level:
+    org.springframework.security: trace
