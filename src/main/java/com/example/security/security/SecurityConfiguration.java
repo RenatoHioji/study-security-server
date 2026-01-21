@@ -23,16 +23,11 @@ public class SecurityConfiguration {
         OAuth2AuthorizationServerConfigurer authorizationServerConfigurer =
                 new OAuth2AuthorizationServerConfigurer();
 
-        http
-                .securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
+        http.securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
                 .with(authorizationServerConfigurer, authorizationServer ->
-                        authorizationServer
-                                .oidc(Customizer.withDefaults())
-                )
+                        authorizationServer.oidc(Customizer.withDefaults()))
                 .authorizeHttpRequests(authorize ->
-                        authorize
-                                .anyRequest().authenticated()
-                )
+                        authorize.anyRequest().authenticated())
                 .exceptionHandling(exceptions -> exceptions
                         .defaultAuthenticationEntryPointFor(
                                 new LoginUrlAuthenticationEntryPoint("/login"),

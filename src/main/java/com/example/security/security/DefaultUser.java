@@ -17,7 +17,7 @@ public class DefaultUser {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         UserDetails user = User.builder()
                 .username("admin")
-                .password("password")
+                .password("{noop}password")
                 .passwordEncoder(encoder::encode)
                 .roles("USER")
                 .build();
